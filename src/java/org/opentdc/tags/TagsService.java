@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 // import io.swagger.annotations.*;
-
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -43,6 +42,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.opentdc.service.GenericService;
+import org.opentdc.service.LocalizedTextModel;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
@@ -72,15 +72,15 @@ public class TagsService extends GenericService<ServiceProvider> {
 		logger.info("TagsService() initialized");
 	}
 
-	/******************************** company *****************************************/
+	/******************************** tag *****************************************/
 	@GET
 	@Path("/")
 //	@ApiOperation(value = "Return a list of all tags", response = List<TagsModel>.class)
 	public List<TagsModel> list(
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) {
 		return sp.list(queryType, query, position, size);
 	}
@@ -131,5 +131,61 @@ public class TagsService extends GenericService<ServiceProvider> {
 		@PathParam("id") String id) 
 	throws NotFoundException, InternalServerErrorException {
 		sp.delete(id);
+	}
+	
+	/********************************** lang ***************************************/
+	@GET
+	@Path("/{tid}/lang")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<LocalizedTextModel> listTexts(
+		@PathParam("tid") String tid,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listTexts(tid, query, queryType, position, size);
+	}
+
+	@POST
+	@Path("/{tid}/lang")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public LocalizedTextModel createText(
+		@PathParam("tid") String tid, 
+		LocalizedTextModel text
+	) throws DuplicateException, ValidationException {
+		return sp.createText(tid, text);
+	}
+	
+	@GET
+	@Path("/{tid}/lang/{lid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public LocalizedTextModel readText(
+		@PathParam("tid") String tid,
+		@PathParam("lid") String lid
+	) throws NotFoundException {
+		return sp.readText(tid, lid);
+	}
+
+	@PUT
+	@Path("/{tid}/lang/{lid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public LocalizedTextModel updateText(
+		@PathParam("tid") String tid,
+		@PathParam("lid") String lid,
+		LocalizedTextModel text
+	) throws NotFoundException, ValidationException {
+		return sp.updateText(tid, lid, text);
+	}
+
+	@DELETE
+	@Path("/{tid}/lang/{lid}")
+	public void deleteText(
+		@PathParam("tid") String tid,
+		@PathParam("lid") String lid
+	) throws NotFoundException, InternalServerErrorException {
+		sp.deleteText(tid, lid);
 	}
 }

@@ -23,7 +23,6 @@
  */
 package org.opentdc.tags;
 
-import java.util.UUID;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -32,7 +31,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author bruno
+ * @author Bruno Kaiser
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -40,8 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class TagsModel {
 
 	private String id;		// sortable
-	private String title;	// mandatory
-	private String description;
+	private int counter; // immutable, internal
 	private Date createdAt;
 	private String createdBy;
 	private Date modifiedAt;
@@ -51,16 +49,6 @@ public class TagsModel {
 	 * Empty constructor.
 	 */
 	public TagsModel() {
-	}
-
-	/**
-	 * Constructor.
-	 * @param title	the title (mandatory)
-	 * @param description	a description
-	 */
-	public TagsModel(String title, String description) {
-		this.title = title;
-		this.description = description;
 	}
 
 	/**
@@ -78,39 +66,22 @@ public class TagsModel {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	/**
-	 * Get the title.
-	 * @return the title
+	 * @return the counter
 	 */
-	public String getTitle() {
-		return title;
+	public int getCounter() {
+		return counter;
 	}
 
 	/**
-	 * Set the title.
-	 * @param title  the title to set
+	 * @param counter the counter to set
 	 */
-	public void setTitle(String title) {
-		this.title = title;
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
-
+	
 	/**
-	 * Get the description.
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * Set the description.
-	 * @param description  the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-/**
 	 * Get the creation date.
 	 * @return the creation date
 	 */
@@ -174,10 +145,10 @@ public class TagsModel {
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
-	
+
 	/******************************* Comparator *****************************/
 	/**
-	 * Comparator for comparing two rates based on their id.
+	 * Comparator for comparing two TagsModels based on their id.
 	 */
 	public static Comparator<TagsModel> TagComparator = new Comparator<TagsModel>() {
 

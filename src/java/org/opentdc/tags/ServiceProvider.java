@@ -25,6 +25,7 @@ package org.opentdc.tags;
 
 import java.util.List;
 
+import org.opentdc.service.LocalizedTextModel;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
@@ -54,5 +55,35 @@ public interface ServiceProvider {
 
 	public abstract void delete(
 		String id) 
+	throws NotFoundException, InternalServerErrorException;
+	
+	//**************************** localized text *************************************
+	public abstract List<LocalizedTextModel> listTexts(
+			String tid,
+			String queryType,
+			String query,
+			int position,
+			int size
+		);
+
+	public abstract LocalizedTextModel createText(
+			String tid,
+			LocalizedTextModel text) 
+	throws DuplicateException, ValidationException;
+
+	public abstract LocalizedTextModel readText(
+			String tid,
+			String lid) 
+	throws NotFoundException;
+
+	public abstract LocalizedTextModel updateText(
+			String tid,
+			String lid, 
+			LocalizedTextModel text) 
+	throws NotFoundException, ValidationException;
+
+	public abstract void deleteText(
+			String tid,
+			String lid) 
 	throws NotFoundException, InternalServerErrorException;
 }
