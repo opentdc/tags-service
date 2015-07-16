@@ -26,6 +26,7 @@ package org.opentdc.tags;
 import java.util.List;
 import java.util.logging.Logger;
 
+
 // import io.swagger.annotations.*;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
@@ -72,11 +73,11 @@ public class TagsService extends GenericService<ServiceProvider> {
 		logger.info("TagsService() initialized");
 	}
 
-	/******************************** tag *****************************************/
+	/******************************** tag *****************************************/	
 	@GET
 	@Path("/")
 //	@ApiOperation(value = "Return a list of all tags", response = List<TagsModel>.class)
-	public List<TagsModel> list(
+	public List<TagTextModel> list(
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
@@ -84,7 +85,7 @@ public class TagsService extends GenericService<ServiceProvider> {
 	) {
 		return sp.list(queryType, query, position, size);
 	}
-
+	
 	@POST
 	@Path("/")
 	//	@ApiOperation(value = "Create a new tag", response = TagsModel.class)

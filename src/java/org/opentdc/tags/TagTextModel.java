@@ -30,40 +30,36 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.opentdc.service.LocalizedTextModel;
+import org.opentdc.util.LanguageCode;
+
 /**
  * @author Bruno Kaiser
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-public class TagsModel {
-
-	private String id;		// sortable
-	private Date createdAt;
+public class TagTextModel {
+	private String tagId;
+	private String localizedTextId;
+	private String text;
+	private LanguageCode lang;
 	private String createdBy;
-	private Date modifiedAt;
-	private String modifiedBy;
+	private Date createdAt;
 
 	/**
 	 * Empty constructor.
 	 */
-	public TagsModel() {
+	public TagTextModel() {
 	}
-
-	/**
-	 * Get the id.
-	 * @return the id.
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * Set the id.
-	 * @param id the id to set, normally this is done on the server only (unique id).
-	 */
-	public void setId(String id) {
-		this.id = id;
+	
+	public TagTextModel(String tagId, LocalizedTextModel ltm, String principal) {
+		this.tagId = tagId;
+		this.localizedTextId = ltm.getId();
+		this.text = ltm.getText();
+		this.lang = ltm.getLangCode();
+		createdBy = principal;
+		createdAt = new Date();
 	}
 	
 	/**
@@ -98,59 +94,83 @@ public class TagsModel {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-
+	
 	/**
-	 * Get the date of the last modification. 
-	 * @return the date of the last modification
+	 * @return the id of the TagsModel object
 	 */
-	public Date getModifiedAt() {
-		return modifiedAt;
+	public String getTagId() {
+		return tagId;
 	}
 
 	/**
-	 * Set the modification date. This should only be change by the server when updating an object.
-	 * @param modifiedAt  the date of the last modification
+	 * @param tagId the id of the TagsModel object
 	 */
-	public void setModifiedAt(Date modifiedAt) {
-		this.modifiedAt = modifiedAt;
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
 	}
 
 	/**
-	 * Get the modifiedBy attribute, i.e. the loginId of the user who made the last update.
-	 * @return modifiedBy the loginId of the user who made the last update
+	 * @return the id of the LocalizedText object
 	 */
-	public String getModifiedBy() {
-		return modifiedBy;
+	public String getLocalizedTextId() {
+		return localizedTextId;
 	}
 
 	/**
-	 * Set the modifiedBy attribute, i.e. the loginId of the user who made the last update.
-	 * @param modifiedBy the loginId of the user who made the last update
+	 * @param localizedTextId the id of the LocalizedText object
 	 */
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
+	public void setLocalizedTextId(String localizedTextId) {
+		this.localizedTextId = localizedTextId;
 	}
 
+	/**
+	 * @return the language code
+	 */
+	public LanguageCode getLang() {
+		return lang;
+	}
+
+	/**
+	 * @param lang the language code
+	 */
+	public void setLang(LanguageCode lang) {
+		this.lang = lang;
+	}
+	
+	/**
+	 * @return the text of the tag (one word)
+	 */
+	public String getText() {
+		return text;
+	}
+
+	/**
+	 * @param text the text of the tag (one word)
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	/******************************* Comparator *****************************/
 	/**
-	 * Comparator for comparing two TagsModels based on their id.
+	 * Comparator for comparing two TagTextModel based on the tag text.
 	 */
-	public static Comparator<TagsModel> TagComparator = new Comparator<TagsModel>() {
+	public static Comparator<TagTextModel> TagComparator = new Comparator<TagTextModel>() {
 
 		/* (non-Javadoc)
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 * @return -1 if the first object is null of smaller; otherwise it returns +1
 		 */
-		public int compare(TagsModel obj1, TagsModel obj2) {
-			if (obj1.getId() == null) {
+		public int compare(TagTextModel obj1, TagTextModel obj2) {
+			if (obj1.getText() == null) {
 				return -1;
 			}
-			if (obj2.getId() == null) {
+			if (obj2.getText() == null) {
 				return 1;
 			}
 
-			String _attr1 = obj1.getId();
-			String _attr2 = obj2.getId();
+			String _attr1 = obj1.getText();
+			String _attr2 = obj2.getText();
 
 			// ascending order
 			return _attr1.compareTo(_attr2);

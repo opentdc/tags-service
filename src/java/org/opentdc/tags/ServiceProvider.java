@@ -33,7 +33,7 @@ import org.opentdc.service.exception.ValidationException;
 
 public interface ServiceProvider {
 	
-	public abstract List<TagsModel> list(
+	public abstract List<TagTextModel> list(
 		String queryType,
 		String query,
 		int position,
