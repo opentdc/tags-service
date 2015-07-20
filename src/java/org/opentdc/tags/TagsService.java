@@ -92,8 +92,8 @@ public class TagsService extends GenericService<ServiceProvider> {
 	//	@ApiResponses(value = 
 	//			{ @ApiResponse(code = 409, message = "An object with the same id exists already (CONFLICT)") },
 	//			{ @ApiResponse(code = 400, message = "Invalid ID supplied or mandatory field missing (BAD_REQUEST)" })
-	public TagsModel create(
-		TagsModel tag) 
+	public TagModel create(
+		TagModel tag) 
 	throws DuplicateException, ValidationException {
 		return sp.create(tag);
 	}
@@ -103,7 +103,7 @@ public class TagsService extends GenericService<ServiceProvider> {
 	//	@ApiOperation(value = "Find a tag by id", response = TagsModel.class)
 	//	@ApiResponses(value = { 
 	//			@ApiResponse(code = 405, message = "An object with the given id was not found (NOT_FOUND)" })
-	public TagsModel read(
+	public TagModel read(
 		@PathParam("id") String id
 	) throws NotFoundException {
 		return sp.read(id);
@@ -115,9 +115,9 @@ public class TagsService extends GenericService<ServiceProvider> {
 	//	@ApiResponses(value =  
 	//			{ @ApiResponse(code = 405, message = "An object with the given id was not found (NOT_FOUND)" },
 	//			{ @ApiResponse(code = 400, message = "Invalid new values given or trying to change immutable fields (BAD_REQUEST)" })
-	public TagsModel update(
+	public TagModel update(
 		@PathParam("id") String id,
-		TagsModel tag
+		TagModel tag
 	) throws NotFoundException, ValidationException {
 		return sp.update(id, tag);
 	}

@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-public class TagsModel {
+public class TagModel {
 
 	private String id;		// sortable
 	private Date createdAt;
@@ -47,7 +47,7 @@ public class TagsModel {
 	/**
 	 * Empty constructor.
 	 */
-	public TagsModel() {
+	public TagModel() {
 	}
 
 	/**
@@ -135,13 +135,13 @@ public class TagsModel {
 	/**
 	 * Comparator for comparing two TagsModels based on their id.
 	 */
-	public static Comparator<TagsModel> TagComparator = new Comparator<TagsModel>() {
+	public static Comparator<TagModel> TagComparator = new Comparator<TagModel>() {
 
 		/* (non-Javadoc)
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 * @return -1 if the first object is null of smaller; otherwise it returns +1
 		 */
-		public int compare(TagsModel obj1, TagsModel obj2) {
+		public int compare(TagModel obj1, TagModel obj2) {
 			if (obj1.getId() == null) {
 				return -1;
 			}

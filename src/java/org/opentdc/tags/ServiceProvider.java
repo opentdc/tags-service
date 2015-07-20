@@ -40,17 +40,17 @@ public interface ServiceProvider {
 		int size
 	);
 
-	public abstract TagsModel create(
-		TagsModel tag) 
+	public abstract TagModel create(
+		TagModel tag) 
 	throws DuplicateException, ValidationException;
 
-	public abstract TagsModel read(
+	public abstract TagModel read(
 		String id) 
 	throws NotFoundException;
 
-	public abstract TagsModel update(
+	public abstract TagModel update(
 		String id, 
-		TagsModel tag) 
+		TagModel tag) 
 	throws NotFoundException, ValidationException;
 
 	public abstract void delete(
