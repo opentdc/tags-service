@@ -43,7 +43,7 @@ public class TagTextModel {
 	private String tagId;
 	private String localizedTextId;
 	private String text;
-	private LanguageCode lang;
+	private LanguageCode languageCode;
 	private String createdBy;
 	private Date createdAt;
 
@@ -57,7 +57,7 @@ public class TagTextModel {
 		this.tagId = tagId;
 		this.localizedTextId = ltm.getId();
 		this.text = ltm.getText();
-		this.lang = ltm.getLangCode();
+		this.languageCode = ltm.getLanguageCode();
 		createdBy = principal;
 		createdAt = new Date();
 	}
@@ -126,15 +126,15 @@ public class TagTextModel {
 	/**
 	 * @return the language code
 	 */
-	public LanguageCode getLang() {
-		return lang;
+	public LanguageCode getLanguageCode() {
+		return languageCode;
 	}
 
 	/**
 	 * @param lang the language code
 	 */
-	public void setLang(LanguageCode lang) {
-		this.lang = lang;
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
 	}
 	
 	/**
