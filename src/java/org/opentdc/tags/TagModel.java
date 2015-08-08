@@ -133,7 +133,7 @@ public class TagModel {
 
 	/******************************* Comparator *****************************/
 	/**
-	 * Comparator for comparing two TagsModels based on their id.
+	 * Comparator for comparing two TagModels based on their id.
 	 */
 	public static Comparator<TagModel> TagComparator = new Comparator<TagModel>() {
 

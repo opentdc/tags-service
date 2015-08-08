@@ -39,7 +39,7 @@ import org.opentdc.util.LanguageCode;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-public class TagTextModel {
+public class SingleLangTag {
 	private String tagId;
 	private String localizedTextId;
 	private String text;
@@ -50,10 +50,10 @@ public class TagTextModel {
 	/**
 	 * Empty constructor.
 	 */
-	public TagTextModel() {
+	public SingleLangTag() {
 	}
 	
-	public TagTextModel(String tagId, LocalizedTextModel ltm, String principal) {
+	public SingleLangTag(String tagId, LocalizedTextModel ltm, String principal) {
 		this.tagId = tagId;
 		this.localizedTextId = ltm.getId();
 		this.text = ltm.getText();
@@ -96,14 +96,14 @@ public class TagTextModel {
 	}
 	
 	/**
-	 * @return the id of the TagsModel object
+	 * @return the id of the TagModel object
 	 */
 	public String getTagId() {
 		return tagId;
 	}
 
 	/**
-	 * @param tagId the id of the TagsModel object
+	 * @param tagId the id of the TagModel object
 	 */
 	public void setTagId(String tagId) {
 		this.tagId = tagId;
@@ -155,13 +155,13 @@ public class TagTextModel {
 	/**
 	 * Comparator for comparing two TagTextModel based on the tag text.
 	 */
-	public static Comparator<TagTextModel> TagComparator = new Comparator<TagTextModel>() {
+	public static Comparator<SingleLangTag> TagComparator = new Comparator<SingleLangTag>() {
 
 		/* (non-Javadoc)
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 * @return -1 if the first object is null of smaller; otherwise it returns +1
 		 */
-		public int compare(TagTextModel obj1, TagTextModel obj2) {
+		public int compare(SingleLangTag obj1, SingleLangTag obj2) {
 			if (obj1.getText() == null) {
 				return -1;
 			}

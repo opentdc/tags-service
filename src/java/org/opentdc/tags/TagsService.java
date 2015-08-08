@@ -76,8 +76,8 @@ public class TagsService extends GenericService<ServiceProvider> {
 	/******************************** tag *****************************************/	
 	@GET
 	@Path("/")
-//	@ApiOperation(value = "Return a list of all tags", response = List<TagsModel>.class)
-	public List<TagTextModel> list(
+//	@ApiOperation(value = "Return a list of all tags", response = List<TagModel>.class)
+	public List<SingleLangTag> list(
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
@@ -88,7 +88,7 @@ public class TagsService extends GenericService<ServiceProvider> {
 	
 	@POST
 	@Path("/")
-	//	@ApiOperation(value = "Create a new tag", response = TagsModel.class)
+	//	@ApiOperation(value = "Create a new tag", response = TagModel.class)
 	//	@ApiResponses(value = 
 	//			{ @ApiResponse(code = 409, message = "An object with the same id exists already (CONFLICT)") },
 	//			{ @ApiResponse(code = 400, message = "Invalid ID supplied or mandatory field missing (BAD_REQUEST)" })
@@ -100,7 +100,7 @@ public class TagsService extends GenericService<ServiceProvider> {
 
 	@GET
 	@Path("/{id}")
-	//	@ApiOperation(value = "Find a tag by id", response = TagsModel.class)
+	//	@ApiOperation(value = "Find a tag by id", response = TagModel.class)
 	//	@ApiResponses(value = { 
 	//			@ApiResponse(code = 405, message = "An object with the given id was not found (NOT_FOUND)" })
 	public TagModel read(
@@ -111,7 +111,7 @@ public class TagsService extends GenericService<ServiceProvider> {
 
 	@PUT
 	@Path("/{id}")
-	//	@ApiOperation(value = "Update the tag with id with new values", response = TagsModel.class)
+	//	@ApiOperation(value = "Update the tag with id with new values", response = TagModel.class)
 	//	@ApiResponses(value =  
 	//			{ @ApiResponse(code = 405, message = "An object with the given id was not found (NOT_FOUND)" },
 	//			{ @ApiResponse(code = 400, message = "Invalid new values given or trying to change immutable fields (BAD_REQUEST)" })
