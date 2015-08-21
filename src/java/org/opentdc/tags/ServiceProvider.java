@@ -60,8 +60,8 @@ public interface ServiceProvider {
 	//**************************** localized text *************************************
 	public abstract List<LocalizedTextModel> listTexts(
 			String tid,
-			String queryType,
 			String query,
+			String queryType,
 			int position,
 			int size
 		);
