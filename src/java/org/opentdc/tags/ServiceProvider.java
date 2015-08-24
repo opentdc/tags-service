@@ -25,6 +25,8 @@ package org.opentdc.tags;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.opentdc.service.LocalizedTextModel;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
@@ -41,6 +43,7 @@ public interface ServiceProvider {
 	);
 
 	public abstract TagModel create(
+		HttpServletRequest request,
 		TagModel tag) 
 	throws DuplicateException, ValidationException;
 
@@ -49,6 +52,7 @@ public interface ServiceProvider {
 	throws NotFoundException;
 
 	public abstract TagModel update(
+		HttpServletRequest request,
 		String id, 
 		TagModel tag) 
 	throws NotFoundException, ValidationException;
@@ -67,6 +71,7 @@ public interface ServiceProvider {
 		);
 
 	public abstract LocalizedTextModel createText(
+			HttpServletRequest request,
 			String tid,
 			LocalizedTextModel text) 
 	throws DuplicateException, ValidationException;
@@ -77,6 +82,7 @@ public interface ServiceProvider {
 	throws NotFoundException;
 
 	public abstract LocalizedTextModel updateText(
+			HttpServletRequest request,
 			String tid,
 			String lid, 
 			LocalizedTextModel text) 

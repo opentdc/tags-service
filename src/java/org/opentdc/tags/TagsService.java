@@ -27,8 +27,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
+
 // import io.swagger.annotations.*;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -93,9 +95,10 @@ public class TagsService extends GenericService<ServiceProvider> {
 	//			{ @ApiResponse(code = 409, message = "An object with the same id exists already (CONFLICT)") },
 	//			{ @ApiResponse(code = 400, message = "Invalid ID supplied or mandatory field missing (BAD_REQUEST)" })
 	public TagModel create(
+		@Context HttpServletRequest request,
 		TagModel tag) 
 	throws DuplicateException, ValidationException {
-		return sp.create(tag);
+		return sp.create(request, tag);
 	}
 
 	@GET
@@ -116,10 +119,11 @@ public class TagsService extends GenericService<ServiceProvider> {
 	//			{ @ApiResponse(code = 405, message = "An object with the given id was not found (NOT_FOUND)" },
 	//			{ @ApiResponse(code = 400, message = "Invalid new values given or trying to change immutable fields (BAD_REQUEST)" })
 	public TagModel update(
+		@Context HttpServletRequest request,
 		@PathParam("id") String id,
 		TagModel tag
 	) throws NotFoundException, ValidationException {
-		return sp.update(id, tag);
+		return sp.update(request, id, tag);
 	}
 
 	@DELETE
@@ -153,10 +157,11 @@ public class TagsService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public LocalizedTextModel createText(
+		@Context HttpServletRequest request,
 		@PathParam("tid") String tid, 
 		LocalizedTextModel text
 	) throws DuplicateException, ValidationException {
-		return sp.createText(tid, text);
+		return sp.createText(request, tid, text);
 	}
 	
 	@GET
@@ -174,11 +179,12 @@ public class TagsService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public LocalizedTextModel updateText(
+		@Context HttpServletRequest request,
 		@PathParam("tid") String tid,
 		@PathParam("lid") String lid,
 		LocalizedTextModel text
 	) throws NotFoundException, ValidationException {
-		return sp.updateText(tid, lid, text);
+		return sp.updateText(request, tid, lid, text);
 	}
 
 	@DELETE

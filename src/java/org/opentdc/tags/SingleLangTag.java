@@ -24,7 +24,6 @@
 package org.opentdc.tags;
 
 import java.util.Comparator;
-import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -44,8 +43,6 @@ public class SingleLangTag {
 	private String localizedTextId;
 	private String text;
 	private LanguageCode languageCode;
-	private String createdBy;
-	private Date createdAt;
 
 	/**
 	 * Empty constructor.
@@ -53,48 +50,13 @@ public class SingleLangTag {
 	public SingleLangTag() {
 	}
 	
-	public SingleLangTag(String tagId, LocalizedTextModel ltm, String principal) {
+	public SingleLangTag(String tagId, LocalizedTextModel ltm) {
 		this.tagId = tagId;
 		this.localizedTextId = ltm.getId();
 		this.text = ltm.getText();
 		this.languageCode = ltm.getLanguageCode();
-		createdBy = principal;
-		createdAt = new Date();
 	}
-	
-	/**
-	 * Get the creation date.
-	 * @return the creation date
-	 */
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	/**
-	 * Set the creation date. This attibute should only be set once at creation time and exclusively by the server.
-	 * @param createdAt the date when this object was created.
-	 */
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	/** 
-	 * Get the creation date.
-	 * @return the creation date
-	 */
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	/**
-	 * Set the createdBy attribute, i.e. the user that created the attribute.
-	 * This attribute should only be set once at creation time and exclusively by the server.
-	 * @param createdBy  the loginId of the user having created the object
-	 */
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-	
+		
 	/**
 	 * @return the id of the TagModel object
 	 */
